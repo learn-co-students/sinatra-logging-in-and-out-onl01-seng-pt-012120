@@ -15,7 +15,7 @@ describe 'ApplicationController' do
 
   describe "POST '/login'" do
     before do
-      @user1 = User.create(:username => "skittles123", :password => "iluvskittles", :balance => 1000)
+      @user1 = User.create(:username => "skittles123", :password => "iluvskittles", :balance => 1000.0)
       @user2 = User.create(:username => "flatiron4lyfe", :password => "Rubie!", :balance => 500)
       @user3 = User.create(:username => "kittens1265", :password => "crazycatlady", :balance => 10000)
     end
@@ -83,7 +83,7 @@ describe 'ApplicationController' do
       post '/login', params
       get '/account'
       expect(last_response.body).to include("<h1>Welcome skittles123</h1>")
-      expect(last_response.body).to include("<h3>Your Balance: 1000.0</h3>")
+      expect(last_response.body).to include("<h3>Your Balance: 1000</h3>")
     end
   end
 
@@ -97,7 +97,7 @@ describe 'ApplicationController' do
       get '/logout'
       expect(session[:user_id]).to be(nil)
     end
-    
+
     it 'redirects to \'/\'' do
       get '/logout'
       follow_redirect!
